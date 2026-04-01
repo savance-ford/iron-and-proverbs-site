@@ -1,26 +1,58 @@
-export const navigationLinks = [
+export type NavLink = {
+  href: string;
+  label: string;
+};
+
+export type ContentCard = {
+  title: string;
+  text: string;
+};
+
+export type LegalSection = {
+  title: string;
+  body: string;
+  bullets?: string[];
+};
+
+export type LegalDocument = {
+  title: string;
+  effectiveDate: string;
+  intro: string;
+  sections: LegalSection[];
+};
+
+export const appStoreUrl =
+  'https://play.google.com/store/apps/details?id=com.ironandproverbs.app';
+
+export const navigationLinks: readonly NavLink[] = [
   { href: '#features', label: 'Features' },
   { href: '#about', label: 'About' },
   { href: '/privacy', label: 'Privacy' },
   { href: '/terms', label: 'Terms' },
 ] as const;
 
-export const featurePreviewItems = [
+export const footerLinks: readonly NavLink[] = [
+  { href: '/privacy', label: 'Privacy Policy' },
+  { href: '/terms', label: 'Terms of Service' },
+  { href: 'mailto:quoteverseapps@gmail.com', label: 'Contact Support' },
+] as const;
+
+export const featurePreviewItems: readonly ContentCard[] = [
   {
     title: 'Daily Word',
-    text: 'Start the day with one focused verse and challenge.',
+    text: 'Start each day with one focused verse and one practical challenge.',
   },
   {
-    title: 'Topics',
-    text: 'Browse fear, anger, purpose, courage, leadership, and more.',
+    title: 'Topic-Based Reading',
+    text: 'Browse verses around courage, anger, purpose, fear, leadership, and faith.',
   },
   {
     title: 'Save & Share',
-    text: 'Bookmark verses and share polished verse cards in a few taps.',
+    text: 'Bookmark powerful passages and share polished verse cards in a few taps.',
   },
 ] as const;
 
-export const featureCards = [
+export const featureCards: readonly ContentCard[] = [
   {
     title: 'Daily Verse + Challenge',
     text: 'Open the app and get one verse with a practical challenge you can apply immediately.',
@@ -31,14 +63,8 @@ export const featureCards = [
   },
   {
     title: 'Save, Share, Return',
-    text: 'Bookmark powerful verses and share designed verse cards with friends and family.',
+    text: 'Bookmark meaningful verses and share designed verse cards with friends and family.',
   },
-] as const;
-
-export const footerLinks = [
-  { href: '/privacy', label: 'Privacy Policy' },
-  { href: '/terms', label: 'Terms of Use' },
-  { href: 'mailto:quoteverseapps@gmail.com', label: 'Contact Support' },
 ] as const;
 
 export const dailyWord = {
@@ -51,57 +77,139 @@ export const dailyWord = {
   challengeText: 'Take one hard step today that requires courage instead of comfort.',
 } as const;
 
-export const policyContent = {
+export const homePageContent = {
+  title: 'Build strength through Scripture.',
+  subtitle:
+    'Iron & Proverbs is a focused Bible app for men who want daily verses, practical challenges, and encouragement rooted in courage, discipline, leadership, and faith.',
+  aboutTitle: 'Built for discipline, courage, and purpose.',
+  aboutText:
+    'Iron & Proverbs was created for men who want daily encouragement rooted in Scripture and practical application. It is built to help you return to the Word consistently and apply it in real life.',
+  missionQuote: '“As iron sharpens iron, so one man sharpens another.”',
+  missionReference: 'Proverbs 27:17',
+} as const;
+
+export const legalDocuments: Record<'privacy' | 'terms', LegalDocument> = {
   privacy: {
     title: 'Privacy Policy',
-    updated: 'Last updated: April 1, 2026',
+    effectiveDate: 'March 5, 2026',
+    intro:
+      'Iron & Proverbs (“the App”) is a Bible-based daily discipline app. Your privacy matters. This Privacy Policy explains what information the App collects and how it is used.',
     sections: [
       {
-        title: 'Information We Collect',
+        title: '1) Information You Provide',
         body:
-          'Iron & Proverbs may collect basic information needed to operate the app, improve performance, and provide support. This can include anonymous usage information, device data, and any information you choose to send when contacting support.',
+          'The App does not require you to create an account and does not ask you to submit personal information such as your name, email address, or phone number.',
       },
       {
-        title: 'How Information Is Used',
+        title: '2) Information Stored on Your Device',
         body:
-          'Information is used to maintain app functionality, understand general usage patterns, improve the product, and respond to support requests. We do not sell your personal information.',
+          'To provide core features, the App stores certain information locally on your device. This information remains on your device and is not transmitted to us.',
+        bullets: [
+          'Saved or bookmarked verses',
+          'App usage preferences, if any',
+          'Streak and last-opened date data',
+        ],
+      },
+      {
+        title: '3) Automatically Collected Information',
+        body:
+          'The App does not collect analytics, advertising identifiers, precise location, contacts, or device identifiers for tracking purposes.',
+      },
+      {
+        title: 'How We Use Information',
+        body: 'Local on-device data is used only to support core app functionality.',
+        bullets: [
+          'Show your saved verses',
+          'Track streaks and progress',
+          'Maintain your app preferences',
+        ],
+      },
+      {
+        title: 'Data Sharing',
+        body:
+          'We do not sell, trade, rent, or share your personal information. The App does not transmit your saved verses or streak data to our servers.',
       },
       {
         title: 'Third-Party Services',
         body:
-          'The app store, hosting providers, analytics tools, or other service providers may process limited technical data required for delivery and performance. Their handling of data is governed by their own policies.',
+          'The App may use standard platform services such as the Google Play Store to distribute the App. Those services may collect information as described in their own privacy policies. If the App includes optional features like sharing a verse image, that content is shared only when you choose to share it using your device’s sharing options.',
       },
       {
-        title: 'Your Choices',
+        title: 'Data Retention',
         body:
-          'If you have privacy questions or would like help regarding your data, contact support using the email listed on this site.',
+          'Because your saved verses and streak data are stored locally on your device, you control it. You can remove this data by clearing the App’s storage or data in your device settings, or by uninstalling the App.',
+      },
+      {
+        title: 'Children’s Privacy',
+        body:
+          'The App is not directed to children under 13. We do not knowingly collect personal information from children.',
+      },
+      {
+        title: 'Security',
+        body:
+          'We take reasonable steps to minimize data collection. Because data is stored locally on your device, protecting your device helps protect your information.',
+      },
+      {
+        title: 'Changes to This Policy',
+        body:
+          'We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date.',
+      },
+      {
+        title: 'Contact Us',
+        body: 'If you have questions about this Privacy Policy, contact us at quoteverseapps@gmail.com.',
       },
     ],
   },
   terms: {
-    title: 'Terms of Use',
-    updated: 'Last updated: April 1, 2026',
+    title: 'Terms of Service',
+    effectiveDate: 'March 5, 2026',
+    intro:
+      'By downloading or using Iron & Proverbs (“the App”), you agree to these Terms of Service.',
     sections: [
       {
-        title: 'Use of the App',
+        title: '1) Use of the App',
         body:
-          'Iron & Proverbs is provided for personal, non-commercial use unless otherwise stated. You agree to use the app lawfully and in a way that does not interfere with the experience of others.',
+          'The App provides Bible verses, devotional-style content, and encouragement for personal use. You agree to use the App lawfully and not to misuse or interfere with the App.',
       },
       {
-        title: 'Content Disclaimer',
+        title: '2) No Professional Advice',
         body:
-          'The app is intended for encouragement and informational purposes. It is not a substitute for pastoral, legal, medical, or professional advice.',
+          'Content in the App is provided for inspirational and informational purposes only and is not a substitute for pastoral counseling, medical, mental health, legal, or professional advice.',
       },
       {
-        title: 'Availability',
+        title: '3) User Content & Sharing',
         body:
-          'Features, content, and availability may change over time. We may update, improve, or discontinue parts of the service when needed.',
+          'If you share verse cards or text from the App, you are responsible for what you share and where you share it.',
       },
       {
-        title: 'Contact',
+        title: '4) Intellectual Property',
         body:
-          'For questions about these terms, reach out using the support email listed on this site.',
+          'The App’s design, layout, and original content, such as category organization and application text, are owned by the developer. Bible verse text may be subject to the terms of the applicable translation.',
+      },
+      {
+        title: '5) Availability and Changes',
+        body:
+          'We may update or change the App over time, including adding, removing, or modifying features.',
+      },
+      {
+        title: '6) Disclaimer of Warranties',
+        body:
+          'The App is provided “as is” without warranties of any kind. We do not guarantee that the App will always be available or error-free.',
+      },
+      {
+        title: '7) Limitation of Liability',
+        body:
+          'To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the App.',
+      },
+      {
+        title: '8) Termination',
+        body:
+          'We may suspend or terminate access to the App if required for legal or safety reasons.',
+      },
+      {
+        title: '9) Contact',
+        body: 'If you have questions about these Terms, contact quoteverseapps@gmail.com.',
       },
     ],
   },
-} as const;
+};

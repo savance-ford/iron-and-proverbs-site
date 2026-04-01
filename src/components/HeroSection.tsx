@@ -1,37 +1,37 @@
-import { dailyWord, featurePreviewItems } from '../data/siteContent';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { appStoreUrl, dailyWord, featurePreviewItems, homePageContent } from '../data/siteContent';
+import { navigateToHash } from '../lib/navigation';
 
-type HeroSectionProps = {
-  onNavigate: (href: string) => void;
-};
+export function HeroSection() {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-export function HeroSection({ onNavigate }: HeroSectionProps) {
+  const handleExploreFeatures = () => {
+    if (location.pathname !== '/') {
+      navigate('/#features');
+      return;
+    }
+
+    navigateToHash('#features');
+  };
+
   return (
     <section className="hero" aria-label="Introduction">
       <div>
         <p className="pill">Daily scripture for discipline</p>
-        <h1 className="hero__title">Build strength through Scripture.</h1>
-        <p className="hero__text">
-          Iron & Proverbs is a clean, focused Bible app for men who want daily verses, practical
-          challenges, and encouragement rooted in courage, discipline, leadership, and faith.
-        </p>
+        <h1 className="hero__title">{homePageContent.title}</h1>
+        <p className="hero__text">{homePageContent.subtitle}</p>
 
         <div className="hero__actions">
-          <a
-            href="https://play.google.com/store/apps/details?id=com.ironandproverbs.app"
-            className="button button--primary"
-          >
+          <a href={appStoreUrl} className="button button--primary">
             View on Google Play
           </a>
-          <a
-            href="#features"
-            className="button button--secondary"
-            onClick={(event) => {
-              event.preventDefault();
-              onNavigate('#features');
-            }}
-          >
+          <button type="button" className="button button--secondary" onClick={handleExploreFeatures}>
             Explore Features
-          </a>
+          </button>
+          <Link to="/privacy" className="button button--secondary">
+            Privacy Policy
+          </Link>
         </div>
 
         <div className="feature-preview-grid">
